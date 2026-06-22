@@ -1,0 +1,44 @@
+<UserControl x:Class="IDESK.Widgets.Schedule.MonthlyCalendar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0 0 0 8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Width="28" Height="28" Content="‹"
+                    Style="{DynamicResource NoChromeButtonStyle}" FontSize="18"
+                    Click="OnPrevMonth"/>
+            <Label Grid.Column="1" x:Name="MonthLabel" FontSize="16" FontWeight="Bold"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Grid.Column="2" Width="28" Height="28" Content="›"
+                    Style="{DynamicResource NoChromeButtonStyle}" FontSize="18"
+                    Click="OnNextMonth"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/><ColumnDefinition/><ColumnDefinition/>
+                <ColumnDefinition/><ColumnDefinition/><ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="日" HorizontalAlignment="Center" FontSize="12" Foreground="{DynamicResource AccentBrush}"/>
+            <Label Grid.Column="1" Content="一" HorizontalAlignment="Center" FontSize="12"/>
+            <Label Grid.Column="2" Content="二" HorizontalAlignment="Center" FontSize="12"/>
+            <Label Grid.Column="3" Content="三" HorizontalAlignment="Center" FontSize="12"/>
+            <Label Grid.Column="4" Content="四" HorizontalAlignment="Center" FontSize="12"/>
+            <Label Grid.Column="5" Content="五" HorizontalAlignment="Center" FontSize="12"/>
+            <Label Grid.Column="6" Content="六" HorizontalAlignment="Center" FontSize="12" Foreground="{DynamicResource AccentBrush}"/>
+        </Grid>
+
+        <UniformGrid x:Name="DayGrid" Grid.Row="2" Columns="7" Margin="0 4 0 0"/>
+    </Grid>
+</UserControl>

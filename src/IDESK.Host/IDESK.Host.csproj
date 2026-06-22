@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Update="version.md" CopyToOutputDirectory="PreserveNewest"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0-preview.4.26230.115" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IDESK.Core\IDESK.Core.csproj" />
+    <ProjectReference Include="..\IDESK.Console\IDESK.Console.csproj" />
+    <ProjectReference Include="..\IDESK.Widgets.Habit\IDESK.Widgets.Habit.csproj" />
+    <ProjectReference Include="..\IDESK.Widgets.Plan\IDESK.Widgets.Plan.csproj" />
+    <ProjectReference Include="..\IDESK.Widgets.Todo\IDESK.Widgets.Todo.csproj" />
+    <ProjectReference Include="..\IDESK.Widgets.Notes\IDESK.Widgets.Notes.csproj" />
+    <ProjectReference Include="..\IDESK.Widgets.Schedule\IDESK.Widgets.Schedule.csproj" />
+    <ProjectReference Include="..\IDESK.Widgets.Translate\IDESK.Widgets.Translate.csproj" />
+    <ProjectReference Include="..\IDESK.Transient.Chat\IDESK.Transient.Chat.csproj" />
+    <ProjectReference Include="..\IDESK.Transient.Translate\IDESK.Transient.Translate.csproj" />
+  </ItemGroup>
+</Project>

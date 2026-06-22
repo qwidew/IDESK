@@ -1,0 +1,63 @@
+<UserControl x:Class="IDESK.Transient.Chat.ChatPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:helper="clr-namespace:IDESK.Core.Helper;assembly=IDESK.Core">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 主题名称（只读，不可编辑切换） -->
+        <Label x:Name="TopicTitle" Content="" FontSize="15" FontWeight="SemiBold"
+               HorizontalAlignment="Center" Padding="0 10 0 8"
+               Foreground="{DynamicResource TextPrimaryBrush}"/>
+        <Border Grid.Row="0" Height="1" VerticalAlignment="Bottom"
+                Background="{DynamicResource SeparatorBrush}"/>
+
+        <!-- 消息列表 -->
+        <ScrollViewer x:Name="MessageScroll" Grid.Row="1" Padding="20 15"
+                      helper:ScrollViewerHelper.AutoHideScrollBars="True">
+            <ScrollViewer.Resources>
+                <Style TargetType="ScrollBar" BasedOn="{StaticResource ThinScrollBarStyle}"/>
+            </ScrollViewer.Resources>
+            <Grid>
+                <StackPanel x:Name="MessagePanel">
+                    <StackPanel x:Name="WelcomePanel" VerticalAlignment="Center"
+                                HorizontalAlignment="Center" Margin="0 40 0 0">
+                        <Label Content="欢迎使用 iDesk" Style="{DynamicResource LogoLabel}" FontSize="22"/>
+                        <Label Content="开始你的对话吧" Style="{DynamicResource DetailLabel}" Margin="0 6 0 0" FontSize="18"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- 输入区域 -->
+        <Border Grid.Row="2" Padding="15 10" Background="Transparent"
+                BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="0 1 0 0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="InputBox" Height="34" VerticalContentAlignment="Center"
+                         Padding="10 0" FontSize="13"
+                         Style="{DynamicResource DefaultTextBoxStyle}"
+                         AcceptsReturn="True"
+                         PreviewKeyDown="OnInputPreviewKeyDown" IsEnabled="true"/>
+                <Button x:Name="MicBtn" Grid.Column="1" Width="32" Height="32" Margin="0 0 6 0"
+                        Style="{DynamicResource FadedButtonStyle}" Click="OnMicClick"
+                        ToolTip="语音输入">
+                    <Path x:Name="MicIcon" Data="{DynamicResource IconMic}" Stretch="Uniform"
+                          Fill="{DynamicResource ActionIconBrush}" Width="16" Height="16"/>
+                </Button>
+                <Button x:Name="SendBtn" Grid.Column="2" Width="70" Height="34"
+                        Style="{DynamicResource DefaultButtonStyle}" Click="OnSendClick">
+                    <Label x:Name="SendBtnLabel" Content="发送" FontSize="13"/>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

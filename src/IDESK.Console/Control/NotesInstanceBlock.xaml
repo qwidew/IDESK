@@ -1,0 +1,21 @@
+<UserControl x:Class="IDESK.Console.Control.NotesInstanceBlock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Border Height="120" VerticalAlignment="Top" CornerRadius="6" Background="{DynamicResource CardBackgroundBrush}" Padding="12" Margin="5"
+            BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1">
+        <Border.Effect>
+            <DropShadowEffect Direction="270" BlurRadius="6" ShadowDepth="2" Opacity="0.15"/>
+        </Border.Effect>
+        <Grid VerticalAlignment="Top">
+            <Label Content="{Binding Name}" FontSize="14"
+                   HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0"/>
+            <Button Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Style="{DynamicResource FadedButtonStyle}"
+                    Command="{Binding DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                    CommandParameter="{Binding}">
+                <Path Data="{DynamicResource IconDelete}" Stretch="Uniform"
+                      Fill="{DynamicResource ActionIconBrush}" Width="12" Height="12"/>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

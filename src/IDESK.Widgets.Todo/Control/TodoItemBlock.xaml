@@ -1,0 +1,155 @@
+<UserControl x:Class="IDESK.Widgets.Todo.Control.TodoItemBlock"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:IDESK.Widgets.Todo.Control"
+             xmlns:cvt="clr-namespace:IDESK.Widgets.Todo.Converters"
+             mc:Ignorable="d"
+             d:DesignHeight="25" d:DesignWidth="360">
+    <UserControl.Resources>
+        <cvt:BrushKeyConverter x:Key="BrushKey"/>
+    </UserControl.Resources>
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- 第一列 上下移动按钮 -->
+        <Button Grid.Column="0" Content="⠿"
+                Style="{DynamicResource FadedButtonStyle}"
+                VerticalAlignment="Center" Width="25" Height="25"/>
+        <!-- 第二列 完成按钮 -->
+        <Button Grid.Column="1" Margin="5" Width="15" Height="15"
+                Command="{Binding CompleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                CommandParameter="{Binding}">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource BorderlessButtonStyle}">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <Path Data="{DynamicResource IconUnchecked}" Stretch="Uniform"
+                                  Fill="{DynamicResource ActionIconBrush}" Width="15" Height="15"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsDone}" Value="True">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <Grid Width="15" Height="15">
+                                        <Ellipse Stroke="{DynamicResource AccentBrush}" StrokeThickness="1.5"/>
+                                        <Path Data="{DynamicResource IconCheck}" Stretch="Uniform"
+                                              Fill="{DynamicResource ActionIconBrush}" Width="15" Height="15"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Path.RenderTransform>
+                                                <TranslateTransform X="1.8" Y="-0.8" />
+                                            </Path.RenderTransform>
+                                        </Path>
+                                    </Grid>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <!-- 第三列 任务名称 -->
+        <Grid Grid.Column="2" VerticalAlignment="Center">
+            <Label x:Name="DisplayText" Content="{Binding Content}"
+                   PreviewMouseLeftButtonDown="OnEditName">
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDone}" Value="True">
+                                <Setter Property="Foreground" Value="{DynamicResource AccentMidBrush}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+            <TextBox x:Name="EditBox" Visibility="Collapsed"
+                     Text="{Binding Content, UpdateSourceTrigger=LostFocus}"
+                     LostFocus="OnEditEnd" KeyDown="OnEditKeyDown"
+                     Style="{DynamicResource InlineEditBoxStyle}"/>
+        </Grid>
+        <!-- 第四列 紧急度指示器（颜色随 DDL 变化） -->
+        <Ellipse Grid.Column="3" Width="7" Height="7" Margin="4 0"
+                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                 Fill="{Binding UrgencyBrushKey, Converter={StaticResource BrushKey}}"
+                 StrokeThickness="0"/>
+        <!-- 第五列 日期 -->
+        <Grid Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Width="50">
+            <Label Content="{Binding CompleteDate}" ContentStringFormat="{}{0:MM/dd}" FontSize="10"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Foreground="{DynamicResource AccentMidBrush}">
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsDone}" Value="True">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+            <Border Background="Transparent" Cursor="Hand"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    MouseLeftButtonDown="OnCalendarClick">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Ddl}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsDone}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <TextBlock Text="{Binding Ddl, StringFormat={}{0:MM/dd}}" FontSize="10"/>
+            </Border>
+            <Border Background="Transparent" Cursor="Hand"
+                    Width="16" Height="16"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    MouseLeftButtonDown="OnCalendarClick">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding IsDone}" Value="False"/>
+                                    <Condition Binding="{Binding Ddl}" Value="{x:Null}"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Path Data="{DynamicResource IconCalendar}" Stretch="Uniform"
+                      Fill="{DynamicResource ActionIconBrush}" Width="14" Height="14"/>
+            </Border>
+        </Grid>
+        <!-- 第六列 删除按钮 -->
+        <Button Grid.Column="5" Margin="5" Width="15" Height="15" Content="×"
+                Command="{Binding DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                CommandParameter="{Binding}">
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource FadedButtonStyle}">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+</UserControl>

@@ -1,0 +1,14 @@
+<UserControl x:Class="IDESK.Console.Control.WidgetsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Path Data="{DynamicResource IconToolbox}" Stretch="Uniform"
+                  Fill="{DynamicResource ActionIconBrush}" Width="48" Height="48" HorizontalAlignment="Center" Margin="0 0 0 15"/>
+            <Label Content="Beta 版本暂不支持" FontSize="18" FontWeight="Bold"
+                   Foreground="{DynamicResource AccentBrush}" HorizontalAlignment="Center"/>
+            <Label Content="未来将包括音乐播放、时钟、计时器等小组件" FontSize="13"
+                   Foreground="{DynamicResource AccentLightBrush}" HorizontalAlignment="Center" Margin="0 6 0 0"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

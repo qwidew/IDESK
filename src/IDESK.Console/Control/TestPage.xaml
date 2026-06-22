@@ -1,0 +1,389 @@
+<UserControl x:Class="IDESK.Console.Control.TestPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer Padding="20">
+        <ScrollViewer.Resources>
+            <Style TargetType="ScrollBar" BasedOn="{StaticResource ThinScrollBarStyle}"/>
+        </ScrollViewer.Resources>
+        <StackPanel>
+            <!-- 1. 获取所有分组 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12"
+                    Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="1. 获取所有分组" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right"
+                            Style="{DynamicResource DefaultButtonStyle}" Click="OnGetGroups"/>
+                    <TextBox x:Name="GroupsOutput" IsReadOnly="True" Height="80"
+                             FontSize="12" Padding="6" Margin="0 6 0 0"
+                             Style="{DynamicResource DefaultTextBoxStyle}"
+                             VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 2. 获取指定组待办 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12"
+                    Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="2. 获取指定组待办" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="GroupId：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="GetTodosGroupId" Grid.Column="1" Height="26" FontSize="12"
+                                 Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right"
+                            Style="{DynamicResource DefaultButtonStyle}" Click="OnGetTodos"/>
+                    <TextBox x:Name="TodosOutput" IsReadOnly="True" Height="100"
+                             FontSize="12" Padding="6" Margin="0 6 0 0"
+                             Style="{DynamicResource DefaultTextBoxStyle}"
+                             VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 3. 添加分组 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12"
+                    Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="3. 添加分组" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="名称：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="AddGroupName" Grid.Column="1" Height="26" FontSize="12"
+                                 Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right"
+                            Style="{DynamicResource DefaultButtonStyle}" Click="OnAddGroup"/>
+                    <TextBox x:Name="AddGroupOutput" IsReadOnly="True" Height="40"
+                             FontSize="12" Padding="6" Margin="0 6 0 0"
+                             Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 4. 添加待办 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12"
+                    Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="4. 添加待办" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="GroupId：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="AddTodoGroupId" Grid.Column="1" Height="26" FontSize="12"
+                                 Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="内容：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="AddTodoContent" Grid.Column="1" Height="26" FontSize="12"
+                                 Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Grid Margin="0 0 0 6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="DDL：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="AddTodoDdl" Grid.Column="1" Height="26" FontSize="12"
+                                 Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right"
+                            Style="{DynamicResource DefaultButtonStyle}" Click="OnAddTodo"/>
+                    <TextBox x:Name="AddTodoOutput" IsReadOnly="True" Height="40"
+                             FontSize="12" Padding="6" Margin="0 6 0 0"
+                             Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 5. 删除待办 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12"
+                    Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="5. 删除待办" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="GroupId：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="DelTodoGroupId" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                        <Label Grid.Column="2" Content="ItemId：" FontSize="12" VerticalAlignment="Center" Margin="8 0 0 0"/>
+                        <TextBox x:Name="DelTodoItemId" Grid.Column="3" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right"
+                            Style="{DynamicResource DefaultButtonStyle}" Click="OnDeleteTodo"/>
+                    <TextBox x:Name="DeleteTodoOutput" IsReadOnly="True" Height="40"
+                             FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 6. 切换完成状态 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12"
+                    Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="6. 切换完成状态" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="GroupId：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="TogTodoGroupId" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                        <Label Grid.Column="2" Content="ItemId：" FontSize="12" VerticalAlignment="Center" Margin="8 0 0 0"/>
+                        <TextBox x:Name="TogTodoItemId" Grid.Column="3" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right"
+                            Style="{DynamicResource DefaultButtonStyle}" Click="OnToggleTodo"/>
+                    <TextBox x:Name="ToggleTodoOutput" IsReadOnly="True" Height="40"
+                             FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 7. 修改截止日期 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12"
+                    Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="7. 修改截止日期" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="GroupId：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="DdlGroupId" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                        <Label Grid.Column="2" Content="ItemId：" FontSize="12" VerticalAlignment="Center" Margin="8 0 0 0"/>
+                        <TextBox x:Name="DdlItemId" Grid.Column="3" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                        <Label Grid.Column="4" Content="DDL：" FontSize="12" VerticalAlignment="Center" Margin="8 0 0 0"/>
+                        <TextBox x:Name="DdlDate" Grid.Column="5" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right"
+                            Style="{DynamicResource DefaultButtonStyle}" Click="OnSetDdl"/>
+                    <TextBox x:Name="SetDdlOutput" IsReadOnly="True" Height="40"
+                             FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 8. 删除分组 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12"
+                    Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="8. 删除分组" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="GroupId：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="DelGroupId" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right"
+                            Style="{DynamicResource DefaultButtonStyle}" Click="OnDeleteGroup"/>
+                    <TextBox x:Name="DeleteGroupOutput" IsReadOnly="True" Height="40"
+                             FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 9. 获取所有习惯 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12" Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="9. 获取所有习惯" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right" Style="{DynamicResource DefaultButtonStyle}" Click="OnHabitGetAll"/>
+                    <TextBox x:Name="HabitGetAllOutput" IsReadOnly="True" Height="80" FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}" VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 10. 添加习惯 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12" Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="10. 添加习惯" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Label Content="名称：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="HabitAddName" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right" Style="{DynamicResource DefaultButtonStyle}" Click="OnHabitAdd"/>
+                    <TextBox x:Name="HabitAddOutput" IsReadOnly="True" Height="40" FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 11. 删除习惯 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12" Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="11. 删除习惯" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Label Content="HabitId：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="HabitDelId" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right" Style="{DynamicResource DefaultButtonStyle}" Click="OnHabitDelete"/>
+                    <TextBox x:Name="HabitDelOutput" IsReadOnly="True" Height="40" FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 12. 习惯打卡 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12" Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="12. 习惯打卡" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="HabitId：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="HabitTogId" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                        <Label Grid.Column="2" Content="日期：" FontSize="12" VerticalAlignment="Center" Margin="8 0 0 0"/>
+                        <TextBox x:Name="HabitTogDate" Grid.Column="3" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right" Style="{DynamicResource DefaultButtonStyle}" Click="OnHabitToggle"/>
+                    <TextBox x:Name="HabitTogOutput" IsReadOnly="True" Height="40" FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+            <!-- 13. 查询某天日程 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12" Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="13. 查询某天日程" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Label Content="日期：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="SchedDate" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right" Style="{DynamicResource DefaultButtonStyle}" Click="OnSchedGetByDate"/>
+                    <TextBox x:Name="SchedDateOutput" IsReadOnly="True" Height="60" FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}" VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 14. 查询日期范围 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12" Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="14. 查询日期范围" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="开始：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="SchedRangeStart" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                        <Label Grid.Column="2" Content="结束：" FontSize="12" VerticalAlignment="Center" Margin="8 0 0 0"/>
+                        <TextBox x:Name="SchedRangeEnd" Grid.Column="3" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right" Style="{DynamicResource DefaultButtonStyle}" Click="OnSchedGetRange"/>
+                    <TextBox x:Name="SchedRangeOutput" IsReadOnly="True" Height="80" FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}" VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 15. 添加日程 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12" Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="15. 添加日程" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="日期：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="SchedAddDate" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                        <Label Grid.Column="2" Content="时间：" FontSize="12" VerticalAlignment="Center" Margin="8 0 0 0"/>
+                        <TextBox x:Name="SchedAddTime" Grid.Column="3" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Label Content="内容：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="SchedAddContent" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right" Style="{DynamicResource DefaultButtonStyle}" Click="OnSchedAdd"/>
+                    <TextBox x:Name="SchedAddOutput" IsReadOnly="True" Height="40" FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 16. 删除日程 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12" Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="16. 删除日程" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Label Content="ItemId：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="SchedDelId" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right" Style="{DynamicResource DefaultButtonStyle}" Click="OnSchedDelete"/>
+                    <TextBox x:Name="SchedDelOutput" IsReadOnly="True" Height="40" FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 17. 查询某天计划 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12" Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="17. 查询计划" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4"><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Label Content="日期：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="PlanDate" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right" Style="{DynamicResource DefaultButtonStyle}" Click="OnPlanGetByDate"/>
+                    <TextBox x:Name="PlanDateOutput" IsReadOnly="True" Height="60" FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}" VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 18. 添加计划 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12" Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="18. 添加计划" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4"><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Label Content="日期：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="PlanAddDate" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Grid Margin="0 0 0 4"><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Label Content="内容：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="PlanAddContent" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Grid Margin="0 0 0 4"><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Label Content="开始：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="PlanAddStart" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                        <Label Grid.Column="2" Content="结束：" FontSize="12" VerticalAlignment="Center" Margin="8 0 0 0"/>
+                        <TextBox x:Name="PlanAddEnd" Grid.Column="3" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right" Style="{DynamicResource DefaultButtonStyle}" Click="OnPlanAdd"/>
+                    <TextBox x:Name="PlanAddOutput" IsReadOnly="True" Height="40" FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 19. 切换计划状态 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12" Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="19. 切换计划状态" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4"><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Label Content="ItemId：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="PlanTogId" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                        <Label Grid.Column="2" Content="日期：" FontSize="12" VerticalAlignment="Center" Margin="8 0 0 0"/>
+                        <TextBox x:Name="PlanTogDate" Grid.Column="3" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right" Style="{DynamicResource DefaultButtonStyle}" Click="OnPlanToggle"/>
+                    <TextBox x:Name="PlanTogOutput" IsReadOnly="True" Height="40" FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 20. 删除计划 -->
+            <Border CornerRadius="6" Padding="14" Margin="0 0 0 12" Background="{DynamicResource CardBackgroundBrush}">
+                <StackPanel>
+                    <Label Content="20. 删除计划" FontSize="14" FontWeight="SemiBold" Padding="0 0 0 8"/>
+                    <Grid Margin="0 0 0 4"><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Label Content="ItemId：" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBox x:Name="PlanDelId" Grid.Column="1" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                        <Label Grid.Column="2" Content="日期：" FontSize="12" VerticalAlignment="Center" Margin="8 0 0 0"/>
+                        <TextBox x:Name="PlanDelDate" Grid.Column="3" Height="26" FontSize="12" Padding="6 0" BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"/>
+                    </Grid>
+                    <Button Content="执行" Width="80" Height="28" HorizontalAlignment="Right" Style="{DynamicResource DefaultButtonStyle}" Click="OnPlanDelete"/>
+                    <TextBox x:Name="PlanDelOutput" IsReadOnly="True" Height="40" FontSize="12" Padding="6" Margin="0 6 0 0" Style="{DynamicResource DefaultTextBoxStyle}"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

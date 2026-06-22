@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>IDESK.Transient.Translate</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IDESK.Core\IDESK.Core.csproj" />
+    <ProjectReference Include="..\IDESK.Widgets.Translate\IDESK.Widgets.Translate.csproj" />
+  </ItemGroup>
+</Project>

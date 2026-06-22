@@ -1,0 +1,67 @@
+<UserControl x:Class="IDESK.Console.Control.SchedulePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:IDESK.Console.Control">
+    <Grid>
+        <Grid VerticalAlignment="Top" Margin="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border x:Name="CreateManagerBtn" Grid.Column="0" Height="120" CornerRadius="6" Margin="4"
+                    BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"
+                    Background="Transparent" Cursor="Hand"
+                    MouseLeftButtonDown="OnCreateManagerClick">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource ItemBgBrush}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Grid VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Path Grid.Row="0" Data="{DynamicResource IconAdd}" Stretch="Uniform"
+                          Fill="{DynamicResource ActionIconBrush}" Width="24" Height="24" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="1" Content="添加日程管理器" FontSize="12"
+                           HorizontalAlignment="Center" Padding="4" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                </Grid>
+            </Border>
+
+            <controls:ScheduleManagerBlock x:Name="ManagerCard" Grid.Column="0" Visibility="Collapsed" Margin="0"/>
+
+            <Border x:Name="CreateTodayBtn" Grid.Column="1" Height="120" CornerRadius="6" Margin="4"
+                    BorderBrush="{DynamicResource CardBorderBrush}" BorderThickness="1"
+                    Background="Transparent" Cursor="Hand" Visibility="Collapsed"
+                    MouseLeftButtonDown="OnCreateTodayClick">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource ItemBgBrush}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Grid VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Path Grid.Row="0" Data="{DynamicResource IconAdd}" Stretch="Uniform"
+                          Fill="{DynamicResource ActionIconBrush}" Width="24" Height="24" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="1" Content="添加今日日程" FontSize="12"
+                           HorizontalAlignment="Center" Padding="4" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                </Grid>
+            </Border>
+
+            <ContentControl x:Name="TodayCardContainer" Grid.Column="1" Visibility="Collapsed" Margin="0"/>
+        </Grid>
+    </Grid>
+</UserControl>

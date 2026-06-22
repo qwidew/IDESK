@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/IDESK.Console/IDESK.Console.csproj" />
+    <Project Path="src/IDESK.Core/IDESK.Core.csproj" />
+    <Project Path="src/IDESK.Host/IDESK.Host.csproj" />
+    <Project Path="src/IDESK.Widgets.Habit/IDESK.Widgets.Habit.csproj" />
+    <Project Path="src/IDESK.Widgets.Notes/IDESK.Widgets.Notes.csproj" />
+    <Project Path="src/IDESK.Widgets.Plan/IDESK.Widgets.Plan.csproj" />
+    <Project Path="src/IDESK.Widgets.Schedule/IDESK.Widgets.Schedule.csproj" />
+    <Project Path="src/IDESK.Widgets.Todo/IDESK.Widgets.Todo.csproj" />
+    <Project Path="src/IDESK.Widgets.Translate/IDESK.Widgets.Translate.csproj" />
+    <Project Path="src/IDESK.Transient.Chat/IDESK.Transient.Chat.csproj" />
+    <Project Path="src/IDESK.Transient.Translate/IDESK.Transient.Translate.csproj" />
+  </Folder>
+</Solution>

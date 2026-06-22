@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>IDESK.Widgets.Plan</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="1.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IDESK.Core\IDESK.Core.csproj" />
+    <ProjectReference Include="..\IDESK.Widgets.Todo\IDESK.Widgets.Todo.csproj" />
+    <ProjectReference Include="..\IDESK.Widgets.Habit\IDESK.Widgets.Habit.csproj" />
+    <ProjectReference Include="..\IDESK.Widgets.Schedule\IDESK.Widgets.Schedule.csproj" />
+  </ItemGroup>
+</Project>
